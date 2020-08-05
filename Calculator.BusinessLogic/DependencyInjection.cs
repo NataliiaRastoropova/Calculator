@@ -8,7 +8,8 @@ namespace Calculator.BusinessLogic
     {
         public static void AddDateBase(this IServiceCollection services)
         {
-            services.AddScoped<IService, CalculationHistoryService>();
+            services.AddScoped<IHistoryService, HistoryService>();
+            services.AddScoped<ICalculatorService, CalculatorService>();
         }
     }
 }
