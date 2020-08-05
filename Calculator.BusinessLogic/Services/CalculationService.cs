@@ -14,6 +14,7 @@ namespace Calculator.BusinessLogic.Services
     public class CalculatorService : ICalculatorService
     {
         private readonly CalculationHistoryRepository m_historyRepository;
+        private string m_equation;
         private readonly Dictionary<char, bool> operationsPriority = new Dictionary<char, bool>()
             {
                 {'*', true},
@@ -40,11 +41,17 @@ namespace Calculator.BusinessLogic.Services
             List<decimal> tempNumbers = model.Numbers.ToList();
             List<char> tempOperations = model.Operations.ToList();
 
+            for (var i = 0; i <= tempOperations.Count-1; i++)
+            {
+                calculationResponse.Equation += tempNumbers[i] + " " + tempOperations[i] + " ";
+            }
+            calculationResponse.Equation += tempNumbers.Last();
+
             while (isCalculating)
             {
                 if (tempOperations.Any(o => operationsPriority[o]))
                 {
-                    for (var i = 0; i <= tempOperations.Count; i++)
+                    for (var i = 0; i <= tempOperations.Count-1; i++)
                     {
                         if (operationsPriority[tempOperations[i]])
                         {
@@ -60,17 +67,15 @@ namespace Calculator.BusinessLogic.Services
                 }
                 else
                 {
-                    for (var i = 0; i <= tempOperations.Count; i++)
+                    for (var i = 0; i <= tempOperations.Count-1; i++)
                     {
                         calculationResponse.ResultValue = CalculateIteration(ref tempNumbers, ref tempOperations, i);
                         break;
                     }
                 }
-
                 isCalculating = tempOperations.Count != 0;
             }
 
-            //calculationResponse.Equation = ;
             calculationResponse.CalculationDate = DateTime.UtcNow;
 
             await m_historyRepository.Create(new Models.CalculationHistoryModel
