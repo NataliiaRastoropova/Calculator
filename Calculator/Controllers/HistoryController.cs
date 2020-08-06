@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Calculator.BusinessLogic.Contracts;
-using Calculator.BusinessLogic.Dto.History;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Calculator.BusinessLogic.Contracts;
+using System;
 
 namespace Calculator.Controllers
 {
@@ -19,28 +19,34 @@ namespace Calculator.Controllers
             m_service = service;
         }
 
+        [HttpGet("list")]
+        public async Task<IActionResult> GetList()
+        {
+            return Ok(await m_service.GetAll());
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(string id)
         {
-            return Ok();
+            return Ok(await m_service.GetById(id));
         }
 
         [HttpGet("last")]
         public async Task<IActionResult> GetLast()
         {
-            return Ok();
+            return Ok(await m_service.GetLast());
         }
 
-        [HttpGet("list")]
-        public async Task<IActionResult> GetList(HistoryRequestDto historyRequestDto)
+        [HttpGet("date={calculationDate}")]
+        public async Task<IActionResult> GetByDate(DateTime calculationDate)
         {
-            return Ok();
+            return Ok(await m_service.GetByDate(calculationDate));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
+            await m_service.Remove(id);
             return Ok();
         }
     }

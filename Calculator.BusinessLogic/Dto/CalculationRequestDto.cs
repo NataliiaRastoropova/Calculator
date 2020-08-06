@@ -1,4 +1,4 @@
-﻿namespace Calculator.BusinessLogic.Dto.Calculation
+﻿namespace Calculator.BusinessLogic.Dto
 {
     public class CalculationRequestDto
     {

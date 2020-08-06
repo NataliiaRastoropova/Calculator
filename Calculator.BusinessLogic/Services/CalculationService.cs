@@ -1,12 +1,12 @@
 ﻿using Calculator.BusinessLogic.Contracts;
-using Calculator.BusinessLogic.Dto.Calculation;
+using Calculator.BusinessLogic.Dto;
 using Calculator.BusinessLogic.Exceptions;
 using Calculator.BusinessLogic.Helpers;
+using Calculator.BusinessLogic.Models;
 using Calculator.BusinessLogic.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Calculator.BusinessLogic.Services
@@ -14,7 +14,6 @@ namespace Calculator.BusinessLogic.Services
     public class CalculatorService : ICalculatorService
     {
         private readonly CalculationHistoryRepository m_historyRepository;
-        private string m_equation;
         private readonly Dictionary<char, bool> operationsPriority = new Dictionary<char, bool>()
             {
                 {'*', true},
@@ -23,9 +22,9 @@ namespace Calculator.BusinessLogic.Services
                 {'-', false},
             };
 
-        public CalculatorService()
+        public CalculatorService(ICalculatorDatabaseSettings databaseSettings)
         {
-            m_historyRepository = new CalculationHistoryRepository();
+            m_historyRepository = new CalculationHistoryRepository(databaseSettings);
         }
 
         public async Task<CalculationResponseDto> Calculate(CalculationRequestDto model)

@@ -1,16 +1,15 @@
-﻿using MongoDB.Driver;
+﻿using Calculator.BusinessLogic.Models;
+using MongoDB.Driver;
 
 namespace Calculator.BusinessLogic.Repositories.Core
 {
     public class BaseRepository
     {
         protected readonly IMongoDatabase m_mongoDatabase;
-        public BaseRepository()
+        public BaseRepository(ICalculatorDatabaseSettings settings)
         {
-            string connectionString = "mongodb://localhost:27017/mobilestore";
-            var connection = new MongoUrlBuilder(connectionString);
-            MongoClient client = new MongoClient(connectionString);
-            m_mongoDatabase = client.GetDatabase(connection.DatabaseName);
+            var client = new MongoClient(settings.ConnectionString);
+            m_mongoDatabase = client.GetDatabase(settings.DatabaseName);
         }
     }
 }

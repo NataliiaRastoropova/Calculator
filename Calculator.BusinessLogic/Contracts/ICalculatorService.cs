@@ -1,4 +1,4 @@
-﻿using Calculator.BusinessLogic.Dto.Calculation;
+﻿using Calculator.BusinessLogic.Dto;
 using System.Threading.Tasks;
 
 namespace Calculator.BusinessLogic.Contracts

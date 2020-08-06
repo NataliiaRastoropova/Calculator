@@ -5,21 +5,18 @@ using Calculator.BusinessLogic.Models;
 using Calculator.BusinessLogic.Repositories.Core;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.GridFS;
 
 namespace Calculator.BusinessLogic.Repositories
 {
     public class CalculationHistoryRepository: BaseRepository
     {
-        IGridFSBucket m_gridFS;  
-        IMongoCollection<CalculationHistoryModel> m_collection; 
+        IMongoCollection<CalculationHistoryModel> m_collection;
 
-        public CalculationHistoryRepository():base()
+        public CalculationHistoryRepository(ICalculatorDatabaseSettings settings) : base(settings)
         {
-            m_gridFS = new GridFSBucket(m_mongoDatabase);
-            m_collection = m_mongoDatabase.GetCollection<CalculationHistoryModel>("CalculationHistories");
+            m_collection = m_mongoDatabase.GetCollection<CalculationHistoryModel>(settings.CalculationHistories);
         }
-
+         
         public async Task Create(CalculationHistoryModel model)
         {
             await m_collection.InsertOneAsync(model);
@@ -33,6 +30,14 @@ namespace Calculator.BusinessLogic.Repositories
         public async Task<CalculationHistoryModel> GetById(string id)
         {
             return await m_collection.Find(new BsonDocument("_id", new ObjectId(id))).FirstOrDefaultAsync();
+        }
+
+        public async Task<CalculationHistoryModel> GetLast()
+        {
+            var sort = Builders<CalculationHistoryModel>.Sort.Descending("_id");
+            var filter = Builders<CalculationHistoryModel>.Filter.Empty;
+
+            return  await m_collection.Find(filter).Sort(sort).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<CalculationHistoryModel>> GetAll()

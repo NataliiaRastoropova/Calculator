@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Calculator.BusinessLogic.Contracts;
-using Calculator.BusinessLogic.Dto.Calculation;
+using Calculator.BusinessLogic.Dto;
 
 namespace Calculator.Controllers
 {
