@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator", "Calculator.csproj", "{B7E6DD79-BC5D-493A-8B35-BA861EADD367}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.BusinessLogic", "..\Calculator.BusinessLogic\Calculator.BusinessLogic.csproj", "{52A5EC87-7E23-466B-B7A9-5370099D6104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.BusinessLogic", "..\Calculator.BusinessLogic\Calculator.BusinessLogic.csproj", "{52A5EC87-7E23-466B-B7A9-5370099D6104}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.Tests", "..\Calculator.Tests\Calculator.Tests.csproj", "{62D43777-0BCC-4229-ACE7-43F6D5B1A152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.Build", "..\Calculator.Build\Calculator.Build.csproj", "{D0613A7F-E933-42BA-A7BC-4B17DEF85280}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculationHistory", "..\CalculationHistory\CalculationHistory.csproj", "{7E547C93-0906-45C6-B8B4-13CAB550E970}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{52A5EC87-7E23-466B-B7A9-5370099D6104}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52A5EC87-7E23-466B-B7A9-5370099D6104}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52A5EC87-7E23-466B-B7A9-5370099D6104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D43777-0BCC-4229-ACE7-43F6D5B1A152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D43777-0BCC-4229-ACE7-43F6D5B1A152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D43777-0BCC-4229-ACE7-43F6D5B1A152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D43777-0BCC-4229-ACE7-43F6D5B1A152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0613A7F-E933-42BA-A7BC-4B17DEF85280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0613A7F-E933-42BA-A7BC-4B17DEF85280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0613A7F-E933-42BA-A7BC-4B17DEF85280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0613A7F-E933-42BA-A7BC-4B17DEF85280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E547C93-0906-45C6-B8B4-13CAB550E970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E547C93-0906-45C6-B8B4-13CAB550E970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E547C93-0906-45C6-B8B4-13CAB550E970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E547C93-0906-45C6-B8B4-13CAB550E970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

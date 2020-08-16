@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Calculator.BusinessLogic;
-using Calculator.Filters;
+using CalculationHistory.Filters;
 
-namespace Calculator
+namespace CalculationHistory
 {
     public class Startup
     {
@@ -28,6 +28,8 @@ namespace Calculator
             {
                 options.Filters.Add(typeof(GeneralFilter));
             });
+
+            services.AddHostedService<HistoryConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

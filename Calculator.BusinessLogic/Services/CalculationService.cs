@@ -2,6 +2,7 @@
 using Calculator.BusinessLogic.Dto;
 using Calculator.BusinessLogic.Exceptions;
 using Calculator.BusinessLogic.Helpers;
+using Calculator.BusinessLogic.MessageBroker;
 using Calculator.BusinessLogic.Models;
 using Calculator.BusinessLogic.Repositories;
 using System;
@@ -13,6 +14,7 @@ namespace Calculator.BusinessLogic.Services
 {
     public class CalculatorService : ICalculatorService
     {
+        private readonly HistoryProducer m_producer;
         private readonly CalculationHistoryRepository m_historyRepository;
         private readonly Dictionary<char, bool> operationsPriority = new Dictionary<char, bool>()
             {
@@ -22,9 +24,10 @@ namespace Calculator.BusinessLogic.Services
                 {'-', false},
             };
 
-        public CalculatorService(ICalculatorDatabaseSettings databaseSettings)
+        public CalculatorService(ICalculatorDatabaseSettings databaseSettings, HistoryProducer produce)
         {
             m_historyRepository = new CalculationHistoryRepository(databaseSettings);
+            m_producer = produce;
         }
 
         public async Task<CalculationResponseDto> Calculate(CalculationRequestDto model)
@@ -77,12 +80,14 @@ namespace Calculator.BusinessLogic.Services
 
             calculationResponse.CalculationDate = DateTime.UtcNow;
 
-            await m_historyRepository.Create(new Models.CalculationHistoryModel
-            {
-                CalculationDate = calculationResponse.CalculationDate,
-                Result = calculationResponse.ResultValue,
-                Equation = calculationResponse.Equation
-            });
+            //await m_historyRepository.Create(new Models.CalculationHistoryModel
+            //{
+            //    CalculationDate = calculationResponse.CalculationDate,
+            //    Result = calculationResponse.ResultValue,
+            //    Equation = calculationResponse.Equation
+            //});
+
+            m_producer.Publish(calculationResponse);
 
             return calculationResponse;
         }

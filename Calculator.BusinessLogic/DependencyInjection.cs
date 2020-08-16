@@ -4,6 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Calculator.BusinessLogic.Contracts;
 using Calculator.BusinessLogic.Services;
 using Calculator.BusinessLogic.Models;
+using System;
+using RabbitMQ.Client;
+using Calculator.BusinessLogic.MessageBroker;
+using System.Reflection;
+using MediatR;
 
 namespace Calculator.BusinessLogic
 {
@@ -18,6 +23,19 @@ namespace Calculator.BusinessLogic
 
             services.AddScoped<IHistoryService, HistoryService>();
             services.AddScoped<ICalculatorService, CalculatorService>();
+            services.AddScoped<HistoryProducer>();
+
+            services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddSingleton(serviceProvider =>
+            {
+                var uri = new Uri("amqp://ftryswjv:FMocPFypneDDZby7BIiFjf_Zqcg2BiEU@buffalo.rmq.cloudamqp.com/ftryswjv");
+                return new ConnectionFactory
+                {
+                    Uri = uri,
+                    DispatchConsumersAsync = true
+                };
+            });
         }
     }
 }

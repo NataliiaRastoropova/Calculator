@@ -4,16 +4,16 @@ using Microsoft.Extensions.Logging;
 using Calculator.BusinessLogic.Contracts;
 using System;
 
-namespace Calculator.Controllers
+namespace CalculationHistory.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class HistoryController : ControllerBase
     {
-        private readonly ILogger<CalculatorController> m_logger;
+        private readonly ILogger<HistoryController> m_logger;
         private readonly IHistoryService m_service;
 
-        public HistoryController(ILogger<CalculatorController> logger, IHistoryService service)
+        public HistoryController(ILogger<HistoryController> logger, IHistoryService service)
         {
             m_logger = logger;
             m_service = service;
