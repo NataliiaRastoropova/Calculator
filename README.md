@@ -11,4 +11,4 @@ Operation length has to be less than numbers less for 1 character.
 ```
 
 ### Technologies
-ASP.NET Core 3.1, Rest API, MongoDb, Swagger UI.
+ASP.NET Core 3.1, Rest API, MongoDb, Swagger UI, Azure, RabbitMQ.
